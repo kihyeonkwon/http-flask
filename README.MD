@@ -6,3 +6,4 @@ Configuring credentials are good
 Now configuring git acp one line command
 pls!
 reinstalled ubuntdfdu
+test credentials
