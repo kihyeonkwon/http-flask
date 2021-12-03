@@ -141,4 +141,35 @@ def create_app(test_config = None):
         return jsonify({'user_id':user_id, 'follows':follows})
 
 
+    @app.route("/timeline/<int:user_id>", methods=['GET'])
+    def timeline(user_id):
+        payload = request.json
+
+        rows = database.execute(text("""
+        SELECT 
+        t.user_id,
+        t.tweet
+        FROM tweets t
+        LEFT JOIN users_follow_list ufl ON ufl.user_id = :user_id
+        WHERE t.user_id = :user_id
+        """), {
+            'user_id':user_id
+            }).fetchall()
+
+        timeline = [{
+            'user_id':row['user_id'],
+            'tweet':row['tweet']
+            } for row in rows]
+
+        return jsonify({
+            'user_id':user_id,
+            'timeline':timeline
+            })
+
+
+
+
+
+
+
     return app
