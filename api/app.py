@@ -102,6 +102,7 @@ def create_app(test_config = None):
         :follow_user_id
         )"""), payload)
 
+
         user_id = payload["id"]
         
         rows = current_app.database.execute(text("""
@@ -114,6 +115,30 @@ def create_app(test_config = None):
 
         return jsonify({'user_id':user_id, 'follows':follows})
 
+
+    @app.route("/unfollow", methods=["POST"])
+    def unfollow():
+        payload = request.json
+
+        app.database.execute(text("""
+        DELETE FROM users_follow_list
+        WHERE user_id = :id
+        AND follow_user_id = :unfollow_user_id
+        """), payload)
+
+
+
+        user_id = payload["id"]
+        
+        rows = current_app.database.execute(text("""
+        SELECT
+        follow_user_id
+        FROM users_follow_list WHERE user_id = :user_id
+        """), {"user_id":user_id}).fetchall()
+
+        follows = [row["follow_user_id"] for row in rows]
+
+        return jsonify({'user_id':user_id, 'follows':follows})
 
 
     return app
