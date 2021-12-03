@@ -1,3 +1,6 @@
+autopep8==1.6.0
+bcrypt==3.2.0
+cffi==1.15.0
 click==8.0.3
 Flask==2.0.2
 greenlet==1.1.2
@@ -6,5 +9,9 @@ Jinja2==3.0.3
 MarkupSafe==2.0.1
 mysql-connector-python==8.0.27
 protobuf==3.19.1
+pycodestyle==2.8.0
+pycparser==2.21
+six==1.16.0
 SQLAlchemy==1.4.27
+toml==0.10.2
 Werkzeug==2.0.2
