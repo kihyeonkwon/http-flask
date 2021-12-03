@@ -89,4 +89,31 @@ def create_app(test_config = None):
 
         return jsonify(created_tweet)
 
+    @app.route("/follow", methods=["POST"])
+    def follow():
+        payload = request.json
+        
+        app.database.execute(text("""
+        INSERT INTO users_follow_list(
+        user_id,
+        follow_user_id
+        ) VALUES(
+        :id,
+        :follow_user_id
+        )"""), payload)
+
+        user_id = payload["id"]
+        
+        rows = current_app.database.execute(text("""
+        SELECT
+        follow_user_id
+        FROM users_follow_list WHERE user_id = :user_id
+        """), {"user_id":user_id}).fetchall()
+
+        follows = [row["follow_user_id"] for row in rows]
+
+        return jsonify({'user_id':user_id, 'follows':follows})
+
+
+
     return app
