@@ -1,10 +1,10 @@
-from flask import Flask, jsonify, request, current_app
+from flask import Flask, jsonify, request, current_app, Response
 from flask.json import JSONEncoder
 from sqlalchemy import create_engine, text
 import bcrypt
 import jwt
 from datetime import datetime, timedelta
-
+from functools import wraps
 
 
 def create_app(test_config = None):
@@ -88,6 +88,10 @@ def create_app(test_config = None):
         else:
             return '', 401
         
+
+
+    
+
 
 
     @app.route('/tweet', methods=['POST'])
