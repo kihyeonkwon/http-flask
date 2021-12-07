@@ -7,3 +7,4 @@ Now configuring git acp one line command
 pls!
 reinstalled ubuntdfdu
 test credentials
+Add unit test
