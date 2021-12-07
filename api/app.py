@@ -148,7 +148,7 @@ def create_app(test_config = None):
     def tweet():
         user_tweet = request.json
         tweet = user_tweet['tweet']
-        user_tweet['id'] = g.user_id
+        user_tweet['id'] = g.user_idhttp://www.yes24.com/Product/Goods/68713424http://www.yes24.com/Product/Goods/68713424
 
         if len(tweet) > 300:
             return '300자를 초과했습니다', 400
